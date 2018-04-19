@@ -21,5 +21,7 @@
 		<mapping class="hibernate.hibernate.modelo.Usuario"/>
 		<mapping class="hibernate.hibernate.modelo.Coche"/>
 		<mapping class="hibernate.hibernate.modelo.Direccion"/>
+		<mapping class="hibernate.hibernate.modelo.Telefono"/>
+		<mapping class="hibernate.hibernate.modelo.DetallesPersona"/>
 	</session-factory>
 </hibernate-configuration>		

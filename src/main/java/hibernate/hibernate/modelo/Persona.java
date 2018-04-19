@@ -1,13 +1,16 @@
 package hibernate.hibernate.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +35,9 @@ public class Persona extends Usuario {
 
 	@ManyToMany(cascade = { CascadeType.ALL })
 	private List<Direccion> direcciones = new ArrayList<Direccion>();
+
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Telefono> telefonos = new HashSet<Telefono>();
 
 	public Persona() {
 
@@ -85,6 +91,16 @@ public class Persona extends Usuario {
 	public void eliminarDireccion(Direccion direccion) {
 		direcciones.remove(direccion);
 		direccion.getPersonas().remove(this);
+	}
+
+	public void agregarTelefono(Telefono telefono) {
+		telefonos.add(telefono);
+		telefono.setPersona(this);
+	}
+
+	public void eliminarTelefono(Telefono telefono) {
+		telefonos.remove(telefono);
+		telefono.setPersona(null);
 	}
 
 }

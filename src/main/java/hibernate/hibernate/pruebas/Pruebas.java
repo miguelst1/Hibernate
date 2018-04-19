@@ -7,6 +7,7 @@ import hibernate.hibernate.modelo.Cliente;
 import hibernate.hibernate.modelo.Direccion;
 import hibernate.hibernate.modelo.EstadoCivil;
 import hibernate.hibernate.modelo.Persona;
+import hibernate.hibernate.modelo.Telefono;
 import hibernate.hibernate.repositorio.RepositorioCliente;
 import hibernate.hibernate.repositorio.RepositorioPersona;
 
@@ -18,6 +19,7 @@ public class Pruebas {
 		crearCliente("22222222B", "sa1");
 		crearCliente("22222222D", "sa3");
 		modificarPersona();
+		eliminarPersona(1);
 		// modificarCliente();
 		// consultarPersona("%Miguel%", "", "", null, "sa2");
 		// consultarCliente("%Miguel%", "", "", null);
@@ -48,8 +50,16 @@ public class Pruebas {
 		direccion2.setCalle("Alemania");
 		direccion2.setNumero(18);
 
+		final Telefono telefono1 = new Telefono();
+		telefono1.setNumero("668203497");
+
+		final Telefono telefono2 = new Telefono();
+		telefono2.setNumero("668203498");
+
 		persona.agregarDireccion(direccion1);
 		persona.agregarDireccion(direccion2);
+		persona.agregarTelefono(telefono1);
+		persona.agregarTelefono(telefono2);
 
 		return RepositorioPersona.crearPersona(persona);
 	}
@@ -87,7 +97,11 @@ public class Pruebas {
 		direccion3.setCalle("Alemania");
 		direccion3.setNumero(18);
 
+		final Telefono telefono3 = new Telefono();
+		telefono3.setNumero("668203491");
+
 		persona.agregarDireccion(direccion3);
+		persona.agregarTelefono(telefono3);
 
 		RepositorioPersona.modificarPersona(persona);
 	}
