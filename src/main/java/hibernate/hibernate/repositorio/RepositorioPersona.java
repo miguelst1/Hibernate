@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import hibernate.hibernate.modelo.EstadoCivil;
 import hibernate.hibernate.modelo.Persona;
+import hibernate.hibernate.modelo.Usuario;
 import hibernate.hibernate.util.HibernateUtil;
 
 public class RepositorioPersona {
@@ -94,8 +95,10 @@ public class RepositorioPersona {
 		try {
 			sesion.beginTransaction();
 
-			sesion.createQuery("Delete Persona where per_id = :identificador").setParameter("identificador", idPersona)
-					.executeUpdate();
+			Usuario usuario = (Usuario) sesion.createQuery("From Usuario u where u.idUsuario = :identificador")
+					.setParameter("identificador", idPersona).uniqueResult();
+
+			sesion.delete(usuario);
 
 			sesion.getTransaction().commit();
 		} catch (Exception e) {
@@ -125,7 +128,8 @@ public class RepositorioPersona {
 		}
 	}
 
-	public static List<Persona> consultar(String nombre, String apellidos, String dni, EstadoCivil estadoCivil) {
+	public static List<Persona> consultar(String nombre, String apellidos, String dni, EstadoCivil estadoCivil,
+			String login) {
 		final Session sesion = HibernateUtil.getSessionFactory().getCurrentSession();
 
 		try {
@@ -144,6 +148,9 @@ public class RepositorioPersona {
 			if (estadoCivil != null) {
 				sb.append(" and per_ecv = :estadoCivil");
 			}
+			if (!login.isEmpty()) {
+				sb.append(" and usu_log = :login");
+			}
 
 			final org.hibernate.query.Query<Persona> consulta = sesion.createQuery(sb.toString());
 
@@ -158,6 +165,9 @@ public class RepositorioPersona {
 			}
 			if (estadoCivil != null) {
 				consulta.setParameter("estadoCivil", estadoCivil.ordinal());
+			}
+			if (!login.isEmpty()) {
+				consulta.setParameter("login", login);
 			}
 
 			return consulta.list();

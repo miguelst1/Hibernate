@@ -17,6 +17,9 @@
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		
 		<mapping class="hibernate.hibernate.modelo.Persona"/>
+		<mapping class="hibernate.hibernate.modelo.Cliente"/>
+		<mapping class="hibernate.hibernate.modelo.Usuario"/>
 		<mapping class="hibernate.hibernate.modelo.Coche"/>
+		<mapping class="hibernate.hibernate.modelo.Direccion"/>
 	</session-factory>
 </hibernate-configuration>		
