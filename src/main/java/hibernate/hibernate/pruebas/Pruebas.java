@@ -6,6 +6,7 @@ import java.util.List;
 import hibernate.hibernate.modelo.Cliente;
 import hibernate.hibernate.modelo.Direccion;
 import hibernate.hibernate.modelo.EstadoCivil;
+import hibernate.hibernate.modelo.Genero;
 import hibernate.hibernate.modelo.Persona;
 import hibernate.hibernate.modelo.Telefono;
 import hibernate.hibernate.repositorio.RepositorioCliente;
@@ -15,11 +16,10 @@ public class Pruebas {
 
 	public static void main(String[] args) {
 		crearPersona("11111111A", "sa");
-		crearPersona("11111111C", "sa2");
-		crearCliente("22222222B", "sa1");
-		crearCliente("22222222D", "sa3");
-		modificarPersona();
-		eliminarPersona(1);
+		// crearPersona("11111111C", "sa2");
+		// crearCliente("22222222B", "sa1");
+		// crearCliente("22222222D", "sa3");
+		// modificarPersona();
 		// modificarCliente();
 		// consultarPersona("%Miguel%", "", "", null, "sa2");
 		// consultarCliente("%Miguel%", "", "", null);
@@ -35,31 +35,32 @@ public class Pruebas {
 		persona.setFechaAlta(new Date());
 		persona.setLogin(login);
 		persona.setPassword("sa");
+		persona.setGenero(Genero.FEMENINO);
 
-		final Direccion direccion1 = new Direccion();
-		direccion1.setProvincia("Sevilla");
-		direccion1.setCiudad("Ecija");
-		direccion1.setCodigoPostal("41439");
-		direccion1.setCalle("Alemania");
-		direccion1.setNumero(18);
-
-		final Direccion direccion2 = new Direccion();
-		direccion2.setProvincia("Sevilla");
-		direccion2.setCiudad("Cañada");
-		direccion2.setCodigoPostal("41439");
-		direccion2.setCalle("Alemania");
-		direccion2.setNumero(18);
-
-		final Telefono telefono1 = new Telefono();
-		telefono1.setNumero("668203497");
-
-		final Telefono telefono2 = new Telefono();
-		telefono2.setNumero("668203498");
-
-		persona.agregarDireccion(direccion1);
-		persona.agregarDireccion(direccion2);
-		persona.agregarTelefono(telefono1);
-		persona.agregarTelefono(telefono2);
+		// final Direccion direccion1 = new Direccion();
+		// direccion1.setProvincia("Sevilla");
+		// direccion1.setCiudad("Ecija");
+		// direccion1.setCodigoPostal("41439");
+		// direccion1.setCalle("Alemania");
+		// direccion1.setNumero(18);
+		//
+		// final Direccion direccion2 = new Direccion();
+		// direccion2.setProvincia("Sevilla");
+		// direccion2.setCiudad("Cañada");
+		// direccion2.setCodigoPostal("41439");
+		// direccion2.setCalle("Alemania");
+		// direccion2.setNumero(18);
+		//
+		// final Telefono telefono1 = new Telefono();
+		// telefono1.setNumero("668203497");
+		//
+		// final Telefono telefono2 = new Telefono();
+		// telefono2.setNumero("668203498");
+		//
+		// persona.agregarDireccion(direccion1);
+		// persona.agregarDireccion(direccion2);
+		// persona.agregarTelefono(telefono1);
+		// persona.agregarTelefono(telefono2);
 
 		return RepositorioPersona.crearPersona(persona);
 	}

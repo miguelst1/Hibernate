@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
@@ -38,6 +39,13 @@ public class Persona extends Usuario {
 
 	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Telefono> telefonos = new HashSet<Telefono>();
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
+	private List<Aficion> aficiones = new ArrayList<Aficion>();
+
+	@Column(name = "PER_GEN")
+	@Convert(converter = GeneroConverter.class)
+	private Genero genero;
 
 	public Persona() {
 
@@ -81,6 +89,38 @@ public class Persona extends Usuario {
 
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
 		this.estadoCivil = estadoCivil;
+	}
+
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
+
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+
+	public Set<Telefono> getTelefonos() {
+		return telefonos;
+	}
+
+	public void setTelefonos(Set<Telefono> telefonos) {
+		this.telefonos = telefonos;
+	}
+
+	public List<Aficion> getAficiones() {
+		return aficiones;
+	}
+
+	public Genero getGenero() {
+		return genero;
+	}
+
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+
+	public void setAficiones(List<Aficion> aficiones) {
+		this.aficiones = aficiones;
 	}
 
 	public void agregarDireccion(Direccion direccion) {

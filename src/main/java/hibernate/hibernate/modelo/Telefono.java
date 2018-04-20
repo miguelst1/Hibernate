@@ -3,8 +3,10 @@ package hibernate.hibernate.modelo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +14,8 @@ import javax.persistence.Table;
 public class Telefono {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence-generator")
+	@SequenceGenerator(name = "sequence-generator", sequenceName = "PER_TEL_sequence", initialValue = 50, allocationSize = 10)
 	@Column(name = "TEL_ID")
 	private Integer id;
 
